@@ -1,3 +1,15 @@
+# Release Notes — 2.8.1 (versionCode 13)
+
+Patch release on top of 2.8.0.
+
+## What's new (2.8.1)
+
+FIXED
+• Solo mode: agenda points are much easier to tap — the score bars now have a
+  larger touch area without changing how they look.
+
+---
+
 # Release Notes — 2.8.0 (versionCode 12)
 
 Covers everything since the last Play Store release (2.6.1 / versionCode 9):
@@ -5,7 +17,7 @@ internal releases 2.6.2 and 2.7.0, plus the 2.8.0 framework upgrade.
 
 ---
 
-## Play Store "What's new" (ready to paste, under 500 chars)
+## Play Store "What's new" 
 
 ```
 NEW
