@@ -52,11 +52,15 @@ export function MiniLadder({
         </Text>
       </View>
 
-      {/* Corp bars — tap +1, long-press −1 */}
+      {/* Corp bars — tap +1, long-press −1.
+          hitSlop extends the touch target vertically to fill the card band
+          (bars are only 8px tall) without growing the visual height.
+          Vertical-only so it never bleeds into the runner zone or center icon. */}
       <Pressable
         onPress={() => corp.bump(1)}
         onLongPress={() => corp.bump(-1)}
         delayLongPress={400}
+        hitSlop={{ top: 16, bottom: 16 }}
         style={{ flex: 1, flexDirection: 'row', gap: 3, alignItems: 'center' }}
       >
         {Array.from({ length: MAX }, (_, i) => {
@@ -96,11 +100,13 @@ export function MiniLadder({
         </Text>
       </Pressable>
 
-      {/* Runner bars — fill from right toward center; tap +1, long-press −1 */}
+      {/* Runner bars — fill from right toward center; tap +1, long-press −1.
+          Same vertical hitSlop as the corp side (see note above). */}
       <Pressable
         onPress={() => runner.bump(1)}
         onLongPress={() => runner.bump(-1)}
         delayLongPress={400}
+        hitSlop={{ top: 16, bottom: 16 }}
         style={{ flex: 1, flexDirection: 'row', gap: 3, alignItems: 'center' }}
       >
         {Array.from({ length: MAX }, (_, i) => {
