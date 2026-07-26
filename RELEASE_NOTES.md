@@ -1,3 +1,15 @@
+# Release Notes — 2.8.2 (versionCode 14)
+
+Maintenance release — no user-facing changes.
+
+## What's new (2.8.2)
+
+UNDER THE HOOD
+• Updated Android target SDK to API level 36 (Android 16) to comply with
+  Google Play's August 2026 requirement.
+
+---
+
 # Release Notes — 2.8.1 (versionCode 13)
 
 Patch release on top of 2.8.0.
