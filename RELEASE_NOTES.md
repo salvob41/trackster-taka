@@ -1,3 +1,14 @@
+# Release Notes — 2.8.4 (versionCode 16)
+
+## What's new (2.8.4)
+
+CHANGED
+• Setup screen: removed the BOTH / CORP / RUNNER mode picker. Just pick a
+  Corp faction, a Runner faction, or both — the game mode follows what you
+  selected. Tap a selected faction again to deselect it.
+
+---
+
 # Release Notes — 2.8.3 (versionCode 15)
 
 Maintenance release — no user-facing changes.
