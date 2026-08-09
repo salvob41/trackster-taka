@@ -1,3 +1,18 @@
+# Release Notes — 2.8.3 (versionCode 15)
+
+Maintenance release — no user-facing changes.
+
+## What's new (2.8.3)
+
+UNDER THE HOOD
+• CI: updated GitHub Actions to their Node 24 runtime releases (checkout,
+  setup-node, setup-java, upload-artifact, action-gh-release) and bumped
+  the build Node version to 24.
+• CI: the Play Store AAB is now also attached to the GitHub release,
+  alongside the sideload APK.
+
+---
+
 # Release Notes — 2.8.2 (versionCode 14)
 
 Maintenance release — no user-facing changes.
