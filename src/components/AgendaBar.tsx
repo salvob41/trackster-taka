@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Pressable } from 'react-native';
-import { rgba } from '../theme';
+import { rgba, glow } from '../theme';
 import { digits } from './DigitText';
 import { useBatchedDelta } from '../hooks/useBatchedDelta';
 
@@ -52,7 +52,7 @@ export function AgendaBar({ score, color, onChange, fillFromTop = true, max = 7 
             flex: 1, borderRadius: 4, width: '100%',
             backgroundColor: filled ? rgba(color, 0.65) : rgba(color, 0.08),
             borderWidth: 1,
-            borderColor: rgba(color, filled ? 0.5 : 0.14),
+            borderColor: rgba(color, filled ? 0.5 : 0.14), ...(filled ? glow(color, 6, 0.5) : {}),
           }} />
         ))}
       </Pressable>

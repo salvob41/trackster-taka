@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { StyleSheet, Pressable, Animated } from 'react-native';
 import { Image } from 'expo-image';
 import * as SplashScreen from 'expo-splash-screen';
+import { ATM } from '../theme';
 
 const FOX = require('../assets/fox.webp');
 
@@ -47,7 +48,7 @@ export function IntroSplash({ onDone }: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#07090d',
+    backgroundColor: ATM.bg,
     alignItems: 'center',
     justifyContent: 'center',
   },

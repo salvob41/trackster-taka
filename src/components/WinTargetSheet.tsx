@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { View, Text, Pressable, Animated, StyleSheet } from 'react-native';
-import { C, rgba } from '../theme';
+import { C, rgba, ATM } from '../theme';
 import { MIN_WIN_TARGET, MAX_WIN_TARGET } from '../state';
 
 interface Props {
@@ -45,15 +45,15 @@ export function WinTargetSheet({ value, onSet, onClose }: Props) {
       <Pressable style={StyleSheet.absoluteFill} onPress={() => close(false)} />
       <Animated.View style={{
         width: '100%', maxWidth: 340,
-        backgroundColor: '#0d1119',
-        borderRadius: 16, borderWidth: 1, borderColor: '#1a2535',
+        backgroundColor: ATM.panel,
+        borderRadius: 16, borderWidth: 1, borderColor: ATM.border,
         transform: [{ scale }], paddingBottom: 16, overflow: 'hidden',
       }}>
         {/* Header */}
         <View style={{
           flexDirection: 'row', alignItems: 'center',
           padding: 12, paddingHorizontal: 16,
-          borderBottomWidth: 1, borderBottomColor: '#1a2535',
+          borderBottomWidth: 1, borderBottomColor: ATM.border,
         }}>
           <Text style={{
             fontSize: 10, letterSpacing: 2, fontWeight: '700',
@@ -116,14 +116,14 @@ export function WinTargetSheet({ value, onSet, onClose }: Props) {
             onPressIn={() => close(true)}
             style={{
               paddingVertical: 14, borderRadius: 10,
-              borderWidth: 1.5, borderColor: rgba('#00f0a0', 0.45),
-              backgroundColor: rgba('#00f0a0', 0.12),
+              borderWidth: 1.5, borderColor: rgba(ATM.green, 0.45),
+              backgroundColor: rgba(ATM.green, 0.12),
               alignItems: 'center',
             }}
           >
             <Text style={{
               fontSize: 14, letterSpacing: 2,
-              color: '#00f0a0', fontFamily: 'Rajdhani_700Bold',
+              color: ATM.green, fontFamily: 'Rajdhani_700Bold',
             }}>
               SET TO {target}
             </Text>

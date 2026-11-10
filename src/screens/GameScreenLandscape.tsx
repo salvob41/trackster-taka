@@ -14,7 +14,8 @@ import { DiceMarkSheet } from '../components/DiceMarkSheet';
 import { WinTargetSheet } from '../components/WinTargetSheet';
 import { MarkChip } from '../components/MarkChip';
 import { DieIcon } from '../components/DieIcon';
-import { C, PlayMode, rgba } from '../theme';
+import { C, PlayMode, rgba, glow, textGlow } from '../theme';
+import { Backdrop } from '../components/Backdrop';
 import { clamp } from '../state';
 import { GameHook } from '../hooks/useGameState';
 
@@ -118,6 +119,7 @@ export function GameScreenLandscape({ game, mode }: Props) {
       paddingRight: insets.right + 8,
       gap: 4,
     }}>
+      <Backdrop topColor={corpColor} bottomColor={runnerColor} />
 
       {/* Top bar */}
       <View style={{
@@ -130,7 +132,7 @@ export function GameScreenLandscape({ game, mode }: Props) {
           <Icon source={CLICK_ICON} size={14} color={activeColor} />
           <Text style={{
             fontFamily: 'Rajdhani_700Bold', fontSize: 12,
-            letterSpacing: 2.5, color: activeColor,
+            letterSpacing: 2.5, color: activeColor, ...textGlow(activeColor),
           }}>
             {gs.active === 'corp' ? 'CORP TURN' : 'RUNNER TURN'}
           </Text>
@@ -168,7 +170,7 @@ export function GameScreenLandscape({ game, mode }: Props) {
             onPress={() => setShowLog(true)}
             style={{
               padding: 4, paddingHorizontal: 8, borderRadius: 6,
-              borderWidth: 1, borderColor: rgba(C.gold, 0.25),
+              borderWidth: 1, borderColor: rgba(C.gold, 0.5),
               backgroundColor: rgba(C.gold, 0.06),
               flexDirection: 'row', alignItems: 'center', gap: 5,
             }}
@@ -196,12 +198,12 @@ export function GameScreenLandscape({ game, mode }: Props) {
             onPressIn={handleReset}
             style={{
               padding: 4, paddingHorizontal: 8, borderRadius: 6,
-              borderWidth: 1, borderColor: rgba(C.red, 0.2),
+              borderWidth: 1, borderColor: rgba(C.red, 0.45), ...glow(C.red, 8, 0.3),
             }}
           >
             <Text style={{
               fontSize: 9, letterSpacing: 1,
-              color: rgba(C.red, 0.55), fontFamily: 'Rajdhani_700Bold',
+              color: rgba(C.red, 0.9), ...textGlow(C.red, 6), fontFamily: 'Rajdhani_700Bold',
             }}>
               RESET
             </Text>
@@ -217,9 +219,10 @@ export function GameScreenLandscape({ game, mode }: Props) {
         {/* Corp panel */}
         {showCorp && <View style={{
           flex: 1, borderRadius: 10, padding: 8,
-          backgroundColor: gs.active === 'corp' ? rgba(corpColor, 0.06) : theme.panel,
+          backgroundColor: gs.active === 'corp' ? rgba(corpColor, 0.08) : rgba(theme.panel, 0.85),
           borderWidth: 2,
-          borderColor: rgba(corpColor, gs.active === 'corp' ? 0.6 : 0.15),
+          borderColor: rgba(corpColor, gs.active === 'corp' ? 0.9 : 0.35),
+          ...glow(corpColor, gs.active === 'corp' ? 22 : 8, gs.active === 'corp' ? 0.55 : 0.15),
           opacity: gs.active === 'runner' ? theme.inactiveOpacity : 1,
         }}>
           {/* Header */}
@@ -229,7 +232,7 @@ export function GameScreenLandscape({ game, mode }: Props) {
               <FactionGlyph faction={corpFaction} size={18} />
             </View>
             <Text style={{
-              fontFamily: 'Rajdhani_700Bold', fontSize: 11, letterSpacing: 2, color: corpColor, flex: 1,
+              fontFamily: 'Rajdhani_700Bold', fontSize: 11, letterSpacing: 2, color: corpColor, ...textGlow(corpColor, 6), flex: 1,
               transform: corpFlipped ? [{ rotate: '180deg' }] : [],
             }}>
               {corpFaction?.name || 'CORP'}
@@ -360,9 +363,10 @@ export function GameScreenLandscape({ game, mode }: Props) {
         {/* Runner panel */}
         {showRunner && <View style={{
           flex: 1, borderRadius: 10, padding: 8,
-          backgroundColor: gs.active === 'runner' ? rgba(runnerColor, 0.06) : theme.panel,
+          backgroundColor: gs.active === 'runner' ? rgba(runnerColor, 0.08) : rgba(theme.panel, 0.85),
           borderWidth: 2,
-          borderColor: rgba(runnerColor, gs.active === 'runner' ? 0.6 : 0.15),
+          borderColor: rgba(runnerColor, gs.active === 'runner' ? 0.9 : 0.35),
+          ...glow(runnerColor, gs.active === 'runner' ? 22 : 8, gs.active === 'runner' ? 0.55 : 0.15),
           opacity: gs.active === 'corp' ? theme.inactiveOpacity : 1,
         }}>
           {/* Header */}
@@ -372,7 +376,7 @@ export function GameScreenLandscape({ game, mode }: Props) {
               <FactionGlyph faction={runnerFaction} size={18} />
             </View>
             <Text style={{
-              fontFamily: 'Rajdhani_700Bold', fontSize: 11, letterSpacing: 2, color: runnerColor, flex: 1,
+              fontFamily: 'Rajdhani_700Bold', fontSize: 11, letterSpacing: 2, color: runnerColor, ...textGlow(runnerColor, 6), flex: 1,
               transform: runnerFlipped ? [{ rotate: '180deg' }] : [],
             }}>
               {runnerFaction?.name || 'RUNNER'}
@@ -529,14 +533,15 @@ export function GameScreenLandscape({ game, mode }: Props) {
             borderRadius: 8, padding: 8,
             alignItems: 'center', justifyContent: 'center',
             flexDirection: 'row', gap: 8,
-            backgroundColor: rgba(activeColor, 0.10),
-            borderWidth: 1, borderColor: rgba(activeColor, 0.45),
+            backgroundColor: rgba(activeColor, 0.16),
+            borderWidth: 1.5, borderColor: activeColor,
+            ...glow(activeColor, 14, 0.5),
           }}
         >
           <Icon source={CLICK_ICON} size={12} color={activeColor} />
           <Text style={{
             fontSize: 11, fontWeight: '700', letterSpacing: 2.5,
-            color: activeColor, fontFamily: 'Rajdhani_700Bold',
+            color: activeColor, fontFamily: 'Rajdhani_700Bold', ...textGlow(activeColor),
           }}>
             END {gs.active === 'corp' ? 'CORP' : 'RUNNER'} TURN
           </Text>

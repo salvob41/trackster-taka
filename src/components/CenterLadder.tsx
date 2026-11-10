@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { Icon } from './Icon';
-import { C, rgba } from '../theme';
+import { C, rgba, glow } from '../theme';
 import { digits } from './DigitText';
 import { useBatchedDelta } from '../hooks/useBatchedDelta';
 
@@ -65,7 +65,7 @@ export function CenterLadder({
               flex: 1, minHeight: 12, maxHeight: 20, borderRadius: 4, width: '100%',
               backgroundColor: filled ? rgba(corpColor, 0.6) : rgba(corpColor, 0.08),
               borderWidth: 1,
-              borderColor: rgba(corpColor, filled ? 0.45 : 0.12),
+              borderColor: rgba(corpColor, filled ? 0.45 : 0.12), ...(filled ? glow(corpColor, 6, 0.5) : {}),
             }}
           />
         ))}
@@ -113,7 +113,7 @@ export function CenterLadder({
               flex: 1, minHeight: 12, maxHeight: 20, borderRadius: 4, width: '100%',
               backgroundColor: filled ? rgba(runnerColor, 0.6) : rgba(runnerColor, 0.08),
               borderWidth: 1,
-              borderColor: rgba(runnerColor, filled ? 0.45 : 0.12),
+              borderColor: rgba(runnerColor, filled ? 0.45 : 0.12), ...(filled ? glow(runnerColor, 6, 0.5) : {}),
             }}
           />
         ))}

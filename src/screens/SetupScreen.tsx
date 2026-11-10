@@ -3,7 +3,8 @@ import { View, Text, Pressable, ScrollView, useWindowDimensions } from 'react-na
 import { Image } from 'expo-image';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FactionGlyph } from '../components/FactionGlyph';
-import { CORP_FACTIONS, RUNNER_FACTIONS, Faction, PlayMode, C, rgba } from '../theme';
+import { Backdrop } from '../components/Backdrop';
+import { CORP_FACTIONS, RUNNER_FACTIONS, Faction, PlayMode, C, rgba, ATM } from '../theme';
 
 // Static transparent fox (adaptive-icon foreground) — not the animated WebP.
 const FOX_LOGO = require('../assets/adaptive-icon.png');
@@ -73,8 +74,8 @@ export function SetupScreen({ onStart, bg }: Props) {
   const handleStartPress = () => {
     if (!ready) return;
     const mode: PlayMode = corpFaction && runnerFaction ? 'both' : corpFaction ? 'corp' : 'runner';
-    const corp = corpFaction ?? { id: '', name: 'CORP', short: 'C', color: '#2fb8ff' };
-    const runner = runnerFaction ?? { id: '', name: 'RUNNER', short: 'R', color: '#ff5020' };
+    const corp = corpFaction ?? { id: '', name: 'CORP', short: 'C', color: ATM.corp };
+    const runner = runnerFaction ?? { id: '', name: 'RUNNER', short: 'R', color: ATM.runner };
     onStart(corp, runner, mode);
   };
 
@@ -88,6 +89,7 @@ export function SetupScreen({ onStart, bg }: Props) {
         paddingRight: insets.right + 12,
         gap: 8,
       }}>
+        <Backdrop topColor={ATM.corp} bottomColor={ATM.runner} />
         {/* Compact title */}
         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
           <Image source={FOX_LOGO} style={{ width: 28, height: 28 }} contentFit="contain" />
@@ -141,13 +143,13 @@ export function SetupScreen({ onStart, bg }: Props) {
           onPressIn={handleStartPress}
           style={{
             width: '100%', padding: 10, borderRadius: 8, alignItems: 'center', flexShrink: 0,
-            backgroundColor: ready ? rgba('#00f0a0', 0.15) : 'rgba(255,255,255,0.04)',
+            backgroundColor: ready ? rgba(ATM.green, 0.15) : 'rgba(255,255,255,0.04)',
             borderWidth: 1,
-            borderColor: ready ? rgba('#00f0a0', 0.5) : 'rgba(255,255,255,0.08)',
+            borderColor: ready ? rgba(ATM.green, 0.5) : 'rgba(255,255,255,0.08)',
           }}
         >
           <Text style={{
-            color: ready ? '#00f0a0' : C.dim,
+            color: ready ? ATM.green : C.dim,
             fontFamily: 'Rajdhani_700Bold', fontSize: 13, letterSpacing: 3,
           }}>
             ▶ START GAME
@@ -158,8 +160,10 @@ export function SetupScreen({ onStart, bg }: Props) {
   }
 
   return (
+    <View style={{ flex: 1, backgroundColor: bg }}>
+    <Backdrop topColor={ATM.corp} bottomColor={ATM.runner} />
     <ScrollView
-      style={{ flex: 1, backgroundColor: bg }}
+      style={{ flex: 1 }}
       contentContainerStyle={{
         paddingTop: insets.top + 24,
         paddingHorizontal: 24,
@@ -212,18 +216,19 @@ export function SetupScreen({ onStart, bg }: Props) {
         onPressIn={handleStartPress}
         style={{
           width: '100%', padding: 16, borderRadius: 10, alignItems: 'center',
-          backgroundColor: ready ? rgba('#00f0a0', 0.15) : 'rgba(255,255,255,0.04)',
+          backgroundColor: ready ? rgba(ATM.green, 0.15) : 'rgba(255,255,255,0.04)',
           borderWidth: 1,
-          borderColor: ready ? rgba('#00f0a0', 0.5) : 'rgba(255,255,255,0.08)',
+          borderColor: ready ? rgba(ATM.green, 0.5) : 'rgba(255,255,255,0.08)',
         }}
       >
         <Text style={{
-          color: ready ? '#00f0a0' : C.dim,
+          color: ready ? ATM.green : C.dim,
           fontFamily: 'Rajdhani_700Bold', fontSize: 15, letterSpacing: 3,
         }}>
           ▶ START GAME
         </Text>
       </Pressable>
     </ScrollView>
+    </View>
   );
 }

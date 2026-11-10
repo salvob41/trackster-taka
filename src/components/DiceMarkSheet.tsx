@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { View, Text, Pressable, Animated, StyleSheet } from 'react-native';
-import { C, rgba } from '../theme';
+import { C, rgba, ATM } from '../theme';
 import { Mark } from '../state';
 
 interface Props {
@@ -83,9 +83,9 @@ export function DiceMarkSheet({ onRollDie, onRollMark, onClose }: Props) {
       <Animated.View style={{
         width: '100%',
         maxWidth: 360,
-        backgroundColor: '#0d1119',
+        backgroundColor: ATM.panel,
         borderRadius: 16,
-        borderWidth: 1, borderColor: '#1a2535',
+        borderWidth: 1, borderColor: ATM.border,
         transform: [{ scale }],
         paddingBottom: 16,
         overflow: 'hidden',
@@ -94,7 +94,7 @@ export function DiceMarkSheet({ onRollDie, onRollMark, onClose }: Props) {
         <View style={{
           flexDirection: 'row', alignItems: 'center',
           padding: 12, paddingHorizontal: 16,
-          borderBottomWidth: 1, borderBottomColor: '#1a2535',
+          borderBottomWidth: 1, borderBottomColor: ATM.border,
         }}>
           <Text style={{
             fontSize: 10, letterSpacing: 2, fontWeight: '700',
