@@ -113,7 +113,7 @@ npx expo export --platform web
 
 To ship a release:
 
-1. Bump `version` and `android.versionCode` in `app.json`.
+1. Bump `version` and `android.versionCode` in `app.json`. This is the only place that holds the app version, and `package.json` has no `version` field.
 2. Add the release to the top of `RELEASE_NOTES.md`.
 3. Merge to `main`, then push a `vX.Y.Z` tag.
 
