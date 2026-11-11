@@ -42,5 +42,6 @@ docs/superpowers/
 NSG-Visual-Assets/
 NSG-Visual-Assets_v1.5.zip
 
-# fastlane run output
+# fastlane run output (regenerated on every run)
 fastlane/report.xml
+fastlane/README.md
