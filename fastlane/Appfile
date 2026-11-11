@@ -1,0 +1,2 @@
+json_key_file("play-service-account.json") # gitignored; Play Console service account key
+package_name("io.github.salvob41.trackstertaka")
