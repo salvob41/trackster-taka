@@ -6,7 +6,7 @@ Trackster Taka is an unofficial companion app for the [Netrunner LCG](https://nu
 
 | Setup | Game, portrait | Game, landscape |
 | --- | --- | --- |
-| ![Setup screen with Jinteki and Criminal selected](fastlane/metadata/android/en-US/images/phoneScreenshots/1_setup.png) | ![Game screen in portrait](fastlane/metadata/android/en-US/images/phoneScreenshots/2_game.png) | ![Game screen in landscape](fastlane/metadata/android/en-US/images/phoneScreenshots/3_game_landscape.png) |
+| ![Setup screen with Jinteki and Criminal selected](fastlane/metadata/android/en-GB/images/phoneScreenshots/1_setup.png) | ![Game screen in portrait](fastlane/metadata/android/en-GB/images/phoneScreenshots/2_game.png) | ![Game screen in landscape](fastlane/metadata/android/en-GB/images/phoneScreenshots/3_game_landscape.png) |
 
 ## How it works
 

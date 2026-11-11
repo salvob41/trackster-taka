@@ -1,0 +1,51 @@
+Trackster Taka is an unofficial companion for the Netrunner LCG. Inspired by the Magic: the Gathering life trackers that have been around for years, only purpose-built for everything Netrunner needs you to track.
+
+
+TWO PLAY MODES
+
+▸ BOTH MODE — Corp and Runner on one device
+Two side-by-side panels for face-to-face play on a single phone. Each side has its own clicks, a split-tap credit counter (left half subtracts, right half adds), faction-specific stat chips, and a +click button for extra-click effects like Bankhar or Beth Kilrain-Chang. The flip button rotates a panel 180° so the player across the table reads it right-side up. A shared agenda bar runs between the two as a tug-of-war — first to 7 wins.
+
+▸ SOLO MODE — track only your side
+Playing across the table from a real opponent? Pick one side at setup. The opposing score is entered via the OPP chip in the header so the agenda bar still works. Side-rail stat chips (tags, core damage, hand size, MU, link, bad publicity) expand on tap to keep the less-used counters out of the way.
+
+
+WHAT IT TRACKS
+
+• Credits — Corp and Runner pools
+• Clicks — 1 to 4 per turn, tap to spend, long-press to refresh
+• Agenda points — 7-segment victory ladder for each side
+• Tags
+• Core damage
+• Bad publicity
+• Memory units (MU)
+• Hand size
+• Link
+
+
+ADAPTS TO YOUR DEVICE
+
+• Portrait stacks Corp on top of Runner with a horizontal agenda bar between them
+• Landscape splits the two side-by-side with a vertical agenda bar centered
+• Rotate any time during a match — the layout adapts
+
+
+QUALITY OF LIFE
+
+• Game log records every action (clicks, credits, draws, agendas, turn flips) with round number and side
+• Full-screen win overlay when either side reaches 7 agenda points
+• Screen stays awake during a match — no auto-lock interrupting play
+• Dark cyberpunk theme
+
+
+PRIVACY FIRST
+
+• No accounts, no sign-ups
+• No internet — works completely offline
+• No analytics, no tracking, no ads
+• Zero data collected, transmitted, or stored
+
+
+UNOFFICIAL
+
+Trackster Taka is an independent, fan-made companion app. It is not affiliated with, endorsed by, or sponsored by Null Signal Games (current Netrunner publisher) or Fantasy Flight Games (former license holder). "Netrunner" is a trademark of its respective owner.
