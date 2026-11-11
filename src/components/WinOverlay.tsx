@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, Pressable, Animated, StyleSheet } from 'react-native';
 import { FactionGlyph } from './FactionGlyph';
-import { Faction, C, rgba } from '../theme';
+import { Faction, C, rgba, ATM } from '../theme';
 
 interface Props {
   winner: 'corp' | 'runner';
@@ -16,7 +16,7 @@ export function WinOverlay({ winner, corpFaction, runnerFaction, onReset, onKeep
   const [hidden, setHidden] = useState(false);
   const isCorpWin = winner === 'corp';
   const faction = isCorpWin ? corpFaction : runnerFaction;
-  const color = faction?.color || (isCorpWin ? '#2fb8ff' : '#ff5020');
+  const color = faction?.color || (isCorpWin ? ATM.corp : ATM.runner);
   const label = isCorpWin
     ? (corpFaction?.name || 'CORPORATION')
     : (runnerFaction?.name || 'RUNNER');

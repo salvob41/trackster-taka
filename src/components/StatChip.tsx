@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { View, Text, Pressable, Animated } from 'react-native';
 import { Icon } from './Icon';
-import { C, rgba } from '../theme';
+import { C, rgba, ATM } from '../theme';
 import { digits } from './DigitText';
 import { useBatchedDelta } from '../hooks/useBatchedDelta';
 
-const PILL_GREEN = '#00f0a0';
-const PILL_RED   = '#ff2040';
+const PILL_GREEN = ATM.green;
+const PILL_RED   = C.red;
 
 interface Props {
   iconSource: ReturnType<typeof require>;
@@ -110,7 +110,7 @@ export function StatChip({ iconSource, value, color, onChange, chipHeight = CHIP
           pointerEvents="none"
           style={{
             position: 'absolute', top: '100%', right: 0, marginTop: 6,
-            backgroundColor: '#0d1119',
+            backgroundColor: ATM.panel,
             borderWidth: 1, borderColor: rgba(color, 0.5),
             borderRadius: 6, paddingVertical: 4, paddingHorizontal: 8,
             opacity: hintOpacity,

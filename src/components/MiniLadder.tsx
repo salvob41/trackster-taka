@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { Icon } from './Icon';
-import { C, rgba } from '../theme';
+import { C, rgba, ATM, glow } from '../theme';
 import { digits } from './DigitText';
 import { useBatchedDelta } from '../hooks/useBatchedDelta';
 
@@ -33,7 +33,7 @@ export function MiniLadder({
   return (
     <View style={{
       flexShrink: 0, paddingVertical: 8, paddingHorizontal: 12,
-      borderRadius: 10, backgroundColor: '#0d1119',
+      borderRadius: 10, backgroundColor: ATM.panel,
       borderWidth: 1, borderColor: rgba(C.gold, 0.2),
       flexDirection: 'row', alignItems: 'center', gap: 10,
     }}>
@@ -72,7 +72,7 @@ export function MiniLadder({
                 flex: 1, height: 8, borderRadius: 2,
                 backgroundColor: filled ? rgba(corpColor, 0.7) : rgba(corpColor, 0.1),
                 borderWidth: 1,
-                borderColor: rgba(corpColor, filled ? 0.6 : 0.18),
+                borderColor: rgba(corpColor, filled ? 0.6 : 0.18), ...(filled ? glow(corpColor, 6, 0.5) : {}),
               }}
             />
           );
@@ -118,7 +118,7 @@ export function MiniLadder({
                 flex: 1, height: 8, borderRadius: 2,
                 backgroundColor: filled ? rgba(runnerColor, 0.7) : rgba(runnerColor, 0.1),
                 borderWidth: 1,
-                borderColor: rgba(runnerColor, filled ? 0.6 : 0.18),
+                borderColor: rgba(runnerColor, filled ? 0.6 : 0.18), ...(filled ? glow(runnerColor, 6, 0.5) : {}),
               }}
             />
           );

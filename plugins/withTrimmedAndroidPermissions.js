@@ -1,4 +1,6 @@
-const { withAndroidManifest } = require('expo/config-plugins');
+const fs = require('fs');
+const path = require('path');
+const { withAndroidManifest, withDangerousMod } = require('expo/config-plugins');
 
 /**
  * Strips Android permissions that get auto-merged in from library manifests
@@ -25,8 +27,44 @@ const PERMISSIONS_TO_REMOVE = [
   'com.android.vending.CHECK_LICENSE',
 ];
 
+// The debug build variant needs INTERNET + ACCESS_NETWORK_STATE back (Metro/
+// the dev client can't open any socket without them), even though the release
+// manifest above correctly strips them. This only patches
+// android/app/src/debug/AndroidManifest.xml — the release AAB built by CI is
+// unaffected.
+const DEBUG_PERMISSIONS_TO_RESTORE = [
+  'android.permission.INTERNET',
+  'android.permission.ACCESS_NETWORK_STATE',
+];
+
+function withDebugInternetPermission(config) {
+  return withDangerousMod(config, [
+    'android',
+    (cfg) => {
+      const manifestPath = path.join(
+        cfg.modRequest.platformProjectRoot,
+        'app/src/debug/AndroidManifest.xml'
+      );
+      let contents = fs.readFileSync(manifestPath, 'utf8');
+
+      const missing = DEBUG_PERMISSIONS_TO_RESTORE.filter(
+        (name) => !contents.includes(name)
+      );
+      if (missing.length > 0) {
+        const lines = missing
+          .map((name) => `    <uses-permission android:name="${name}" tools:node="replace"/>`)
+          .join('\n');
+        contents = contents.replace(/[ \t]*<application/, `${lines}\n\n    <application`);
+        fs.writeFileSync(manifestPath, contents);
+      }
+
+      return cfg;
+    },
+  ]);
+}
+
 module.exports = function withTrimmedAndroidPermissions(config) {
-  return withAndroidManifest(config, (cfg) => {
+  config = withAndroidManifest(config, (cfg) => {
     const manifest = cfg.modResults.manifest;
 
     // Ensure the `tools` namespace is declared on <manifest>.
@@ -52,4 +90,6 @@ module.exports = function withTrimmedAndroidPermissions(config) {
 
     return cfg;
   });
+
+  return withDebugInternetPermission(config);
 };

@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { Animated, Pressable } from 'react-native';
 import { Icon } from './Icon';
-import { rgba } from '../theme';
+import { rgba, glow } from '../theme';
 
 const CLICK_ICON = require('../assets/click.png');
 const CLICK_SPENT_ICON = require('../assets/click_spent.png');
@@ -39,6 +39,7 @@ export function ClickToken({ filled, color, onTap, size = 48, ghost = false, rad
         backgroundColor: bg, borderWidth: 2, borderColor,
         alignItems: 'center', justifyContent: 'center',
         opacity: ghost ? 0.65 : 1,
+        ...(filled && !ghost ? glow(color, 10, 0.55) : {}),
         transform: [{ scale }],
       }}>
         <Icon

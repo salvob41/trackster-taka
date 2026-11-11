@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { View, Text, Pressable, Animated, ScrollView, StyleSheet } from 'react-native';
 import { LogEntry } from '../state';
-import { C, rgba } from '../theme';
+import { C, rgba, ATM } from '../theme';
 
 interface Props {
   log: LogEntry[];
@@ -10,8 +10,8 @@ interface Props {
 
 function LogRow({ entry }: { entry: LogEntry }) {
   const colors: Record<string, string> = {
-    corp: '#2fb8ff',
-    runner: '#ff5020',
+    corp: ATM.corp,
+    runner: ATM.runner,
     game: C.gold,
   };
   const color = colors[entry.player] || C.dim;
@@ -64,15 +64,15 @@ export function LogSheet({ log, onClose }: Props) {
       {/* Backdrop tap to dismiss */}
       <Pressable style={StyleSheet.absoluteFill} onPress={close} />
       <Animated.View style={{
-        backgroundColor: '#0d1119',
+        backgroundColor: ATM.panel,
         borderRadius: 16, borderBottomLeftRadius: 0, borderBottomRightRadius: 0,
-        borderWidth: 1, borderColor: '#1a2535', maxHeight: '65%',
+        borderWidth: 1, borderColor: ATM.border, maxHeight: '65%',
         transform: [{ translateY }],
       }}>
         <View style={{
           flexDirection: 'row', alignItems: 'center',
           padding: 12, paddingHorizontal: 16,
-          borderBottomWidth: 1, borderBottomColor: '#1a2535',
+          borderBottomWidth: 1, borderBottomColor: ATM.border,
         }}>
           <Text style={{
             fontSize: 10, letterSpacing: 2, fontWeight: '700',

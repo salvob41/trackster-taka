@@ -16,7 +16,7 @@ import { GameScreen } from './screens/GameScreen';
 import { GameScreenLandscape } from './screens/GameScreenLandscape';
 import { IntroSplash } from './components/IntroSplash';
 import { useGameState } from './hooks/useGameState';
-import { Faction, PlayMode, ATMOSPHERES } from './theme';
+import { Faction, PlayMode, ATM } from './theme';
 
 // Keep the native splash visible until IntroSplash takes over.
 SplashScreen.preventAutoHideAsync().catch(() => {});
@@ -39,10 +39,8 @@ export default function App() {
   const [runnerFaction, setRunnerFaction] = useState<Faction | null>(null);
   const [mode, setMode] = useState<PlayMode>('both');
 
-  // Default to Neon Punk theme; easily swappable in the future
-  const atm = ATMOSPHERES['Neon Punk'];
   const theme = {
-    ...atm,
+    ...ATM,
     tokenRadius: 12,
     inactiveOpacity: 0.72,
   };
@@ -101,7 +99,7 @@ export default function App() {
 
   if (!fontsLoaded) {
     return (
-      <View style={{ flex: 1, backgroundColor: '#07090d', alignItems: 'center', justifyContent: 'center' }}>
+      <View style={{ flex: 1, backgroundColor: ATM.bg, alignItems: 'center', justifyContent: 'center' }}>
         <ActivityIndicator color="#2fb8ff" />
       </View>
     );
