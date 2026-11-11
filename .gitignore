@@ -93,3 +93,6 @@ docs/superpowers/
 NSG-Visual-Assets/
 NSG-Visual-Assets_v1.5.zip
 __pycache__/
+
+# fastlane run output
+fastlane/report.xml

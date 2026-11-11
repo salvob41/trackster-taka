@@ -1,0 +1,12 @@
+default_platform(:android)
+
+platform :android do
+  desc "Upload store listing text and screenshots from fastlane/metadata/android to Google Play"
+  lane :metadata do
+    upload_to_play_store(
+      skip_upload_apk: true,
+      skip_upload_aab: true,
+      skip_upload_changelogs: true
+    )
+  end
+end

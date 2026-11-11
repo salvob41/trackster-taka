@@ -82,6 +82,15 @@ For consistent Android signing across CI builds, set `ANDROID_KEYSTORE_B64`, `AN
 
 Tag `vX.Y.Z` to ship: APK release via `build-apk.yml`, web deploy to Pages on push to `main`.
 
+### Play Store listing
+
+Store texts and screenshots live in `fastlane/metadata/android/<language>/`. Screenshots upload in filename order, so prefix them `1_`, `2_`, and so on. Google Play rejects phone screenshots longer than 2:1. On a 1080x2400 emulator, run `adb shell wm size 1080x2160` before you capture with `adb exec-out screencap -p > shot.png`, and `adb shell wm size reset` afterwards.
+
+1. Install fastlane: `brew install fastlane`.
+2. Save the Play Console service account key as `play-service-account.json` in the repo root. Git ignores this file.
+3. First time only: run `fastlane supply init` to download the current listing.
+4. Run `fastlane metadata` to upload the listing. It does not upload an app build.
+
 ## Code layout
 
 ```
