@@ -109,13 +109,17 @@ npx expo export --platform web
 | `ci.yml` | Pull requests and pushes to `main` | Runs `tsc --noEmit` and the Jest tests. |
 | `deploy-web.yml` | Pushes to `main` | Deploys the web version to GitHub Pages. |
 | `build-apk.yml` | `v*` tags | Builds the sideload APK and attaches it to the GitHub release. |
-| `build-aab.yml` | `v*` tags | Builds the signed Play Store AAB and attaches it to the GitHub release. |
+| `build-aab.yml` | `v*` tags, or by hand | Builds the signed Play Store AAB. On a tag, it also attaches the AAB to the GitHub release. |
 
 To ship a release:
 
 1. Bump `version` and `android.versionCode` in `app.json`. This is the only place that holds the app version, and `package.json` has no `version` field.
-2. Add the release to the top of `RELEASE_NOTES.md`.
-3. Merge to `main`, then push a `vX.Y.Z` tag.
+2. Add the release to the top of `RELEASE_NOTES.md`, and the tester notes to `fastlane/metadata/android/en-GB/changelogs/<versionCode>.txt` (500 characters at most).
+3. On the release branch, run `gh workflow run build-aab.yml --ref <branch>`. It builds the signed AAB as a workflow artifact, without a GitHub release.
+4. Download the artifact with `gh run download <run id> -n netrunner-tracker-aab -D <folder>`, then run `fastlane testing aab:<folder>/app-release.aab validate_only:true` and `fastlane testing aab:<folder>/app-release.aab`. This puts the build on the internal testing track.
+5. Test the build from the Play Store, and check **Policy status** in the Play Console.
+6. Promote the build to production in the Play Console, and run `fastlane metadata` to publish the store listing.
+7. Merge to `main`, then push a `vX.Y.Z` tag. CI attaches the APK and AAB to the GitHub release. Google Play already has this versionCode, so do not upload the tag's AAB again.
 
 The Android workflows sign the app with the repo secrets `ANDROID_KEYSTORE_B64`, `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_ALIAS`, and `ANDROID_KEY_PASSWORD`.
 

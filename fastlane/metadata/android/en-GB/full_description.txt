@@ -4,17 +4,17 @@ Trackster Taka is an unofficial companion for the Netrunner LCG. Inspired by the
 TWO PLAY MODES
 
 ▸ BOTH MODE — Corp and Runner on one device
-Two side-by-side panels for face-to-face play on a single phone. Each side has its own clicks, a split-tap credit counter (left half subtracts, right half adds), faction-specific stat chips, and a +click button for extra-click effects like Bankhar or Beth Kilrain-Chang. The flip button rotates a panel 180° so the player across the table reads it right-side up. A shared agenda bar runs between the two as a tug-of-war — first to 7 wins.
+Two side-by-side panels for face-to-face play on a single phone. Each side has its own clicks, a split-tap credit counter (left half subtracts, right half adds), faction-specific stat chips, and a +click button for extra-click effects like Bankhar or Beth Kilrain-Chang. The flip button rotates a panel 180° so the player across the table reads it right-side up. An agenda ladder tracks both scores. The first side to reach the win target wins. The target is 7 by default, and you can set it from 1 to 10.
 
 ▸ SOLO MODE — track only your side
-Playing across the table from a real opponent? Pick one side at setup. The opposing score is entered via the OPP chip in the header so the agenda bar still works. Side-rail stat chips (tags, core damage, hand size, MU, link, bad publicity) expand on tap to keep the less-used counters out of the way.
+Playing across the table from a real opponent? Pick one side at setup. Enter the opponent's agenda points on the ladder. The OPP chip in the header tracks their tags or bad publicity. Side-rail stat chips (tags, core damage, hand size, MU, link, bad publicity) expand on tap to keep the less-used counters out of the way.
 
 
 WHAT IT TRACKS
 
 • Credits — Corp and Runner pools
-• Clicks — 1 to 4 per turn, tap to spend, long-press to refresh
-• Agenda points — 7-segment victory ladder for each side
+• Clicks — 3 for the Corp and 4 for the Runner, tap to spend, refilled when the turn ends
+• Agenda points — a ladder for each side, up to the win target
 • Tags
 • Core damage
 • Bad publicity
@@ -25,17 +25,18 @@ WHAT IT TRACKS
 
 ADAPTS TO YOUR DEVICE
 
-• Portrait stacks Corp on top of Runner with a horizontal agenda bar between them
-• Landscape splits the two side-by-side with a vertical agenda bar centered
+• Portrait stacks Corp on top of Runner, with each side's agenda ladder on the right edge
+• Landscape puts the two side by side, with the agenda ladder between them
 • Rotate any time during a match — the layout adapts
 
 
 QUALITY OF LIFE
 
 • Game log records every action (clicks, credits, draws, agendas, turn flips) with round number and side
-• Full-screen win overlay when either side reaches 7 agenda points
+• Dice and marks — roll a d2, d3, d6, or d20, or pick a random HQ, R&D, or Archives mark
+• Full-screen win overlay when either side reaches the win target
 • Screen stays awake during a match — no auto-lock interrupting play
-• Dark cyberpunk theme
+• Neon noir theme with glowing panels and a grid backdrop
 
 
 PRIVACY FIRST

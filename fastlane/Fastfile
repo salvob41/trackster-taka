@@ -22,6 +22,21 @@ platform :android do
     clear_tablet_screenshots(validate_only: validate_only)
   end
 
+  desc "Upload an AAB to the internal testing track, with changelogs/<versionCode>.txt as its release notes"
+  desc "Pass aab:<path>, and validate_only:true to check the upload on Google Play without publishing it"
+  lane :testing do |options|
+    UI.user_error!("Pass the bundle with aab:<path>") unless options[:aab]
+
+    upload_to_play_store(
+      track: "internal",
+      aab: options[:aab],
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true,
+      validate_only: options[:validate_only] == true || options[:validate_only] == "true"
+    )
+  end
+
   # supply clears a screenshot type only when it has local files to upload,
   # so it never deletes the old tablet screenshots. This uses supply's own client.
   private_lane :clear_tablet_screenshots do |options|
