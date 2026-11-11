@@ -1,0 +1,2 @@
+Neon noir look: a violet-black background, brighter faction colours, and a grid backdrop tinted with the Corp and Runner colours.
+The active panel, the end turn button, clicks, credits, and agenda points glow in the side's colour.
