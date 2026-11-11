@@ -1,129 +1,171 @@
-# Trackster Taka — Netrunner
+# Trackster Taka
 
-Unofficial companion for the [Netrunner LCG](https://nullsignal.games/) — track credits, clicks, tags, agenda points, core damage, bad publicity, MU, hand size, and link in a single tap-first screen. Same idea as the MTG life trackers that have circulated for years, only purpose-built for Netrunner. Built with React Native + Expo (TypeScript). Runs in the browser, on Android, and on iOS.
+Trackster Taka is an unofficial companion app for the [Netrunner LCG](https://nullsignal.games/). It tracks credits, clicks, agenda points, tags, core damage, bad publicity, MU, hand size, and link on one screen. It runs in the browser, on Android, and on iOS, and is built with React Native and Expo (TypeScript).
 
-**[Try it in your browser →](https://salvob41.github.io/trackster-taka/)**
+**[Try it in your browser](https://salvob41.github.io/trackster-taka/)**
 
-## Tour
+| Setup | Game, portrait | Game, landscape |
+| --- | --- | --- |
+| ![Setup screen with Jinteki and Criminal selected](fastlane/metadata/android/en-US/images/phoneScreenshots/1_setup.png) | ![Game screen in portrait](fastlane/metadata/android/en-US/images/phoneScreenshots/2_game.png) | ![Game screen in landscape](fastlane/metadata/android/en-US/images/phoneScreenshots/3_game_landscape.png) |
 
-The tracker has two play modes — **Both** (Corp and Runner on one device) and **Solo** (just your side) — and adapts to **portrait** or **landscape** automatically. Below is one panel per screen, showing how each mode looks in each orientation.
+## How it works
 
 ### Setup
 
-Pick the side(s) you want to track and the matching faction(s). Each faction tile glows in its own color when selected; **START GAME** unlocks once your selection is valid. The mode toggle (`BOTH` / `CORP` / `RUNNER`) at the top decides whether you'll see one panel or two during the game.
+Pick a Corp faction, a Runner faction, or one of each, then tap **START GAME**. The selection sets the game mode:
 
-| Portrait | Landscape |
-| --- | --- |
-| ![Setup — portrait](docs/img/setup-portrait.png) | ![Setup — landscape](docs/img/setup-landscape.png) |
+- One of each tracks both sides on one device.
+- A single faction tracks only your side, for when your opponent sits across the table.
 
-### Both mode — Corp and Runner on one device
+Tap a selected faction again to deselect it.
 
-The full two-sided tracker. Each side shows clicks (top), a split-tap credit counter (`–` left half subtracts, `+` right half adds), faction-specific stat chips, and a **+ click** button that cycles an extra-click counter (0→1→2→3) for cards like *Bankhar* or *Beth Kilrain-Chang*. The **`↑↓` flip button** rotates that side's panel 180° so the player across the table reads it right-side up. The shared **agenda bar** is the tug-of-war between the two scores: Corp fills from one end, Runner from the other, first to 7 wins.
+### Game screen
 
-- **Portrait** stacks Corp on top of Runner with a horizontal agenda bar between them.
-- **Landscape** splits them left/right with a vertical agenda bar centered between the panels.
+Each side has these controls:
 
-| Portrait | Landscape |
-| --- | --- |
-| ![Both mode — portrait](docs/img/game-portrait-both.png) | ![Both mode — landscape](docs/img/game-landscape-both.png) |
+- Click tokens at the top. Tap one to spend a click.
+- A credit counter. Tap its left half to subtract a credit and its right half to add one.
+- **Draw** and **+¢** buttons. Each one spends a click and logs the action.
+- A small **+** button that cycles extra clicks from 0 to 3, for cards that grant more clicks.
+- Stat chips. The Corp has bad publicity. The Runner has tags, core damage, hand size, MU, and link.
+- A **⇅** button that turns the panel 180 degrees, so the player across the table can read it.
 
-### Solo mode — track only your side
+The agenda ladder shows both scores. Tap a side's ladder to add an agenda point, and long-press it to remove one. The center cell shows the win target, which defaults to 7. Tap it to choose a target from 1 to 10.
 
-If you're playing across the table from a human opponent, pick one side at setup. The opposing score is entered manually via the `OPP` chip in the header so the agenda bar still works. Stat chips on the side rail (tags, core damage, hand size, MU, link, bad publicity) expand on tap so the less-used counters stay out of the way.
+In single-side mode, the header has an opponent chip that shows the opponent's agenda points. Tap the chip's second counter to add a tag to the Runner or bad publicity to the Corp, and long-press it to remove one. Enter the opponent's agenda points on the ladder.
 
-| Solo Corp — portrait | Solo Runner — portrait |
-| --- | --- |
-| ![Solo Corp — portrait](docs/img/game-portrait-corp.png) | ![Solo Runner — portrait](docs/img/game-portrait-runner.png) |
+The die button in the header opens a sheet that rolls a d2, d3, d6, or d20, or picks a random mark (HQ, R&D, or Archives). The mark stays on screen as a chip.
 
-| Solo Corp — landscape | Solo Runner — landscape |
-| --- | --- |
-| ![Solo Corp — landscape](docs/img/game-landscape-corp.png) | ![Solo Runner — landscape](docs/img/game-landscape-runner.png) |
+Portrait stacks the Corp above the Runner. Landscape puts them side by side with the ladder between them.
 
-### Game log
+### Game log and win screen
 
-Every action — clicks spent, credits taken, cards drawn, agendas scored or stolen, turn transitions — is recorded with its round number and side. Tap **GAME LOG** at the bottom (portrait) or the **LOG** chip in the header (landscape) to slide up the full history.
+The game log records every action with its round and side. Open it with **GAME LOG** at the bottom in portrait, or the **LOG** chip in the header in landscape.
 
-| Portrait | Landscape |
-| --- | --- |
-| ![Game log — portrait](docs/img/log-portrait.png) | ![Game log — landscape](docs/img/log-landscape.png) |
+When a side reaches the win target, a win screen shows the winning faction and a **NEW GAME** button.
 
-### Win overlay
-
-When either side reaches 7 agenda points, a win overlay covers the board with the winning faction and a **NEW GAME** button to reset.
-
-![Win overlay](docs/img/win-portrait.png)
-
-## Why
-
-Netrunner has a lot of state to track per side: clicks, credits, agenda points, tags, damage, hand size, MU, link, bad pub. This keeps it all on one screen so you can stay in the game.
+The screen stays on while the app is open. Dice rolls, mark picks, and win target changes give haptic feedback.
 
 ## Run locally
 
+Install the dependencies first:
+
 ```bash
 npm install
-npm run web    # browser
-npm start      # Metro — scan the QR with Expo Go for Android/iOS
 ```
+
+Start the web version:
+
+```bash
+npm run web
+```
+
+Start Metro and scan the QR code with Expo Go on a phone:
+
+```bash
+npm start
+```
+
+### Android emulator
+
+You need JDK 17 and the Android SDK command line tools, with `ANDROID_HOME` set. Install the emulator and an Android 16 (API 36) system image, then create a virtual device. On an Intel Mac, replace `arm64-v8a` with `x86_64`.
+
+```bash
+sdkmanager "emulator" "platform-tools" "system-images;android-36;google_apis_playstore;arm64-v8a"
+avdmanager create avd -n pixel8_api36 -d pixel_8 \
+  -k "system-images;android-36;google_apis_playstore;arm64-v8a"
+```
+
+Boot the emulator, then build and install the debug app:
+
+```bash
+$ANDROID_HOME/emulator/emulator -avd pixel8_api36
+npx expo run:android --device pixel8_api36
+```
+
+`--device` takes the virtual device name, not the `emulator-5554` serial. The first Gradle build takes several minutes.
+
+The debug build is much slower than a release build. After a screen rotation, Android can show an "isn't responding" dialog. Tap **Wait**.
 
 ## Build
 
+The release workflows build the Android app, so a local release build is rarely needed. To build an APK locally:
+
 ```bash
-# Android APK (needs Android SDK + JDK 17)
 npx expo prebuild --platform android
 cd android && ./gradlew assembleRelease
-
-# Web static site
-npx expo export --platform web   # → dist/
 ```
 
-For consistent Android signing across CI builds, set `ANDROID_KEYSTORE_B64`, `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_ALIAS`, and `ANDROID_KEY_PASSWORD` as repo secrets — `.github/workflows/build-apk.yml` picks them up.
+To build the static web site into `dist/`:
 
-## Releasing
+```bash
+npx expo export --platform web
+```
 
-Tag `vX.Y.Z` to ship: APK release via `build-apk.yml`, web deploy to Pages on push to `main`.
+## CI and releases
+
+| Workflow | Runs on | What it does |
+| --- | --- | --- |
+| `ci.yml` | Pull requests and pushes to `main` | Runs `tsc --noEmit` and the Jest tests. |
+| `deploy-web.yml` | Pushes to `main` | Deploys the web version to GitHub Pages. |
+| `build-apk.yml` | `v*` tags | Builds the sideload APK and attaches it to the GitHub release. |
+| `build-aab.yml` | `v*` tags | Builds the signed Play Store AAB and attaches it to the GitHub release. |
+
+To ship a release:
+
+1. Bump `version` and `android.versionCode` in `app.json`.
+2. Add the release to the top of `RELEASE_NOTES.md`.
+3. Merge to `main`, then push a `vX.Y.Z` tag.
+
+The Android workflows sign the app with the repo secrets `ANDROID_KEYSTORE_B64`, `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_ALIAS`, and `ANDROID_KEY_PASSWORD`.
 
 ### Play Store listing
 
-Store texts and screenshots live in `fastlane/metadata/android/<language>/`. Screenshots upload in filename order, so prefix them `1_`, `2_`, and so on. Google Play rejects phone screenshots longer than 2:1. On a 1080x2400 emulator, run `adb shell wm size 1080x2160` before you capture with `adb exec-out screencap -p > shot.png`, and `adb shell wm size reset` afterwards.
+The store texts, screenshots, and feature graphic are in `fastlane/metadata/android/<language>/`. Screenshots upload in filename order, so prefix them `1_`, `2_`, and so on.
 
-1. Install fastlane: `brew install fastlane`.
+1. Install fastlane with `brew install fastlane`.
 2. Save the Play Console service account key as `play-service-account.json` in the repo root. Git ignores this file.
-3. First time only: run `fastlane supply init` to download the current listing.
-4. Run `fastlane metadata` to upload the listing. It does not upload an app build.
+3. The first time only, run `fastlane supply init` to download the current listing.
+4. Run `fastlane metadata` to upload the listing. This lane does not upload an app build.
+
+Google Play rejects phone screenshots longer than 2:1, and the Pixel 8 screen is 1080x2400. Change the emulator display to 1080x2160 before you capture, and restore it afterwards:
+
+```bash
+adb shell wm size 1080x2160
+adb exec-out screencap -p > shot.png
+adb shell wm size reset
+```
 
 ## Code layout
 
 ```
 src/
-├── App.tsx                 # entry, orientation routing
-├── theme.ts                # colors, factions
-├── state.ts                # game state + rules
-├── hooks/                  # useGameState, useBatchedDelta
-├── screens/                # SetupScreen, GameScreen, GameScreenLandscape
-└── components/             # CreditCounter, ClickToken, StatChip, AgendaBar, …
+├── App.tsx        # entry point, intro, picks the portrait or landscape screen
+├── theme.ts       # colors, fonts, factions
+├── state.ts       # game state and rules, no React imports
+├── hooks/         # useGameState, useBatchedDelta
+├── screens/       # SetupScreen, GameScreen, GameScreenLandscape
+├── components/    # counters, ladders, chips, sheets, overlays
+└── assets/        # icons, fonts, backdrop images
+plugins/           # Expo config plugin that trims Android permissions
+fastlane/          # Play Store listing lane and metadata
 ```
 
-State lives in `state.ts` with no React imports — screens map state to widgets and call handlers, they don't make rule decisions.
+`state.ts` holds every rule decision. The screens map state to widgets and call its handlers.
 
 ## Credits
 
-- Game: [Null Signal Games](https://nullsignal.games/) (formerly NISEI / FFG)
+- Game: [Null Signal Games](https://nullsignal.games/), formerly NISEI and FFG
 - Icons: [NSG Visual Assets](https://nullsignal.games/about/resources/)
 - Hand icon: [Kalashnyk on Flaticon](https://www.flaticon.com/free-icon/five_9437501)
 - App icon: [Fox animated icons created by Freepik - Flaticon](https://www.flaticon.com/free-animated-icons/fox)
-- Android adaptive icon stack (foreground / background / monochrome) generated with [Icon Kitchen](https://icon.kitchen/)
-- Built with [Expo](https://expo.dev/) + [React Native](https://reactnative.dev/)
+- Android adaptive icon (foreground, background, and monochrome layers): generated with [Icon Kitchen](https://icon.kitchen/)
+- Built with [Expo](https://expo.dev/) and [React Native](https://reactnative.dev/)
 
 ## License
 
-Code is licensed under the **Apache License 2.0** — see [LICENSE](./LICENSE)
-and [NOTICE.md](./NOTICE.md).
+The code is licensed under the **Apache License 2.0**. See [LICENSE](./LICENSE) and [NOTICE.md](./NOTICE.md).
 
-Bundled third-party assets are **not** covered by Apache-2.0 and keep their own
-licenses: Null Signal Games icons under CC BY-ND 4.0, and the Flaticon icons
-(hand, fox app icon) under the Flaticon license. See [NOTICE.md](./NOTICE.md)
-for full attributions.
+Bundled third-party assets keep their own licenses, which Apache-2.0 does not cover. The Null Signal Games icons use CC BY-ND 4.0. The Flaticon icons (hand and fox app icon) use the Flaticon license. [NOTICE.md](./NOTICE.md) has the full attributions.
 
-Unofficial fan project — not affiliated with or endorsed by Null Signal Games,
-Fantasy Flight Games, or Wizards of the Coast. *Android: Netrunner* and related
-marks are trademarks of their respective owners.
+This is an unofficial fan project. Null Signal Games, Fantasy Flight Games, and Wizards of the Coast do not endorse it and are not affiliated with it. *Android: Netrunner* and related marks are trademarks of their respective owners.
