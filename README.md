@@ -125,8 +125,10 @@ The store texts, screenshots, and feature graphic are in `fastlane/metadata/andr
 
 1. Install fastlane with `brew install fastlane`.
 2. Save the Play Console service account key as `play-service-account.json` in the repo root. Git ignores this file.
-3. The first time only, run `fastlane supply init` to download the current listing.
-4. Run `fastlane metadata` to upload the listing. This lane does not upload an app build.
+3. Run `fastlane metadata validate_only:true`. Google Play checks the upload and discards it, so the live listing does not change.
+4. Run `fastlane metadata` to publish the listing. It replaces the phone screenshots and deletes the tablet screenshots, which this repo does not keep. It does not upload an app build.
+
+If someone edits the listing in the Play Console, download it with `fastlane supply init --metadata_path <empty folder>` and copy the changed text files into `fastlane/metadata/android/`. `supply init` refuses to write into a folder that already exists.
 
 Google Play rejects phone screenshots longer than 2:1, and the Pixel 8 screen is 1080x2400. Change the emulator display to 1080x2160 before you capture, and restore it afterwards:
 

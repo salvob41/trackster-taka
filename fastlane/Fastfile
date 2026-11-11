@@ -2,11 +2,54 @@ default_platform(:android)
 
 platform :android do
   desc "Upload store listing text and screenshots from fastlane/metadata/android to Google Play"
-  lane :metadata do
+  desc "Also deletes the tablet screenshots, which the repo does not keep"
+  desc "Pass validate_only:true to check the upload on Google Play without publishing it"
+  lane :metadata do |options|
+    validate_only = options[:validate_only] == true || options[:validate_only] == "true"
+
+    # supply needs a release to attach the listing to, even without changelogs.
+    # The production track holds more than one release, so pick the newest.
+    version_code = google_play_track_version_codes(track: "production").map(&:to_i).max
+
     upload_to_play_store(
+      version_code: version_code,
       skip_upload_apk: true,
       skip_upload_aab: true,
-      skip_upload_changelogs: true
+      skip_upload_changelogs: true,
+      validate_only: validate_only
     )
+
+    clear_tablet_screenshots(validate_only: validate_only)
+  end
+
+  # supply clears a screenshot type only when it has local files to upload,
+  # so it never deletes the old tablet screenshots. This uses supply's own client.
+  private_lane :clear_tablet_screenshots do |options|
+    require "supply"
+
+    # Lane code runs inside fastlane/, and the Appfile key path is relative to the repo root.
+    client = Dir.chdir("..") do
+      Supply.config = FastlaneCore::Configuration.create(Supply::Options.available_options, {})
+      Supply::Client.make_from_config
+    end
+    client.begin_edit(package_name: Supply.config[:package_name])
+
+    metadata_path = File.join(__dir__, "metadata/android")
+    languages = Dir.children(metadata_path).select { |c| File.directory?(File.join(metadata_path, c)) }.sort
+    languages.each do |language|
+      %w(sevenInchScreenshots tenInchScreenshots).each do |type|
+        UI.message("Deleting #{type} for #{language}")
+        client.clear_screenshots(image_type: type, language: language)
+      end
+    end
+
+    if options[:validate_only]
+      client.validate_current_edit!
+      client.abort_current_edit
+      UI.success("Tablet screenshot deletion validated. Nothing changed on Google Play.")
+    else
+      client.commit_current_edit!
+      UI.success("Deleted the tablet screenshots on Google Play.")
+    end
   end
 end
