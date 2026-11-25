@@ -1,3 +1,18 @@
+# Release Notes — 2.9.0 (versionCode 17)
+
+## What's new (2.9.0)
+
+NEW
+• Neon noir look: a violet-black background, brighter faction colors, and
+  a grid backdrop tinted with the Corp and Runner colors.
+• The active panel, the end turn button, clicks, credits, and agenda
+  points glow in the side's color.
+
+UNDER THE HOOD
+• Removed the leftover files of the old Python version of the app.
+
+---
+
 # Release Notes — 2.8.4 (versionCode 16)
 
 ## What's new (2.8.4)
